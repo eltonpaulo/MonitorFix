@@ -1,0 +1,59 @@
+﻿{
+    "version":  "2.0.0",
+    "tasks":  [
+                  {
+                      "label":  "GitHub: Sincronizacao continua",
+                      "type":  "shell",
+                      "command":  "powershell",
+                      "args":  [
+                                   "-NoProfile",
+                                   "-ExecutionPolicy",
+                                   "Bypass",
+                                   "-File",
+                                   "${workspaceFolder}\\.vscode\\github-sync\\continuous-git-sync.ps1",
+                                   "-ProjectPath",
+                                   "${workspaceFolder}",
+                                   "-IntervalSeconds",
+                                   "15"
+                               ],
+                      "runOptions":  {
+                                         "runOn":  "folderOpen"
+                                     },
+                      "presentation":  {
+                                           "reveal":  "silent",
+                                           "panel":  "dedicated",
+                                           "focus":  false,
+                                           "clear":  false,
+                                           "showReuseMessage":  false
+                                       },
+                      "problemMatcher":  [
+
+                                         ]
+                  },
+                  {
+                      "label":  "GitHub: Sync inteligente agora",
+                      "type":  "shell",
+                      "command":  "powershell",
+                      "args":  [
+                                   "-NoProfile",
+                                   "-ExecutionPolicy",
+                                   "Bypass",
+                                   "-File",
+                                   "${workspaceFolder}\\.vscode\\github-sync\\continuous-git-sync.ps1",
+                                   "-ProjectPath",
+                                   "${workspaceFolder}",
+                                   "-Once"
+                               ],
+                      "presentation":  {
+                                           "reveal":  "silent",
+                                           "panel":  "dedicated",
+                                           "focus":  false,
+                                           "clear":  false,
+                                           "showReuseMessage":  false
+                                       },
+                      "problemMatcher":  [
+
+                                         ]
+                  }
+              ]
+}
