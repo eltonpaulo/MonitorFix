@@ -1,0 +1,8 @@
+/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/obj/Debug/net8.0/MonitorToneFix.csproj.AssemblyReference.cache
+/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache
+/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/obj/Debug/net8.0/Avalonia/resources
+/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/obj/Debug/net8.0/MonitorToneFix.GeneratedMSBuildEditorConfig.editorconfig
+/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/obj/Debug/net8.0/MonitorToneFix.AssemblyInfoInputs.cache
+/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/obj/Debug/net8.0/MonitorToneFix.AssemblyInfo.cs
+/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/obj/Debug/net8.0/MonitorToneFix.csproj.CoreCompileInputs.cache
+/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/obj/Debug/net8.0/MonitorToneFix.sourcelink.json
