@@ -41,7 +41,17 @@ public static class BuiltInPresets
     {
         new() { Name = "Branco para cinza muito claro", Build = () => GrayPreset(240, 50, 235) },
         new() { Name = "Branco para cinza claro", Build = () => GrayPreset(224, 70, 220) },
-        new() { Name = "Branco para cinza médio", Build = () => GrayPreset(190, 80, 190) },
+        new()
+        {
+            Name = "Branco para cinza médio",
+            Build = () =>
+            {
+                var p = GrayPreset(190, 80, 190);
+                p.Global.MaxHighlightBrightness = 210;
+                p.Global.LuminancePreservationPercent = 70;
+                return p;
+            },
+        },
         new() { Name = "Branco para cinza escuro", Build = () => GrayPreset(150, 90, 150) },
         new() { Name = "Branco para cinza forte (máximo)", Build = () => GrayPreset(120, 100, 120) },
         new()
@@ -66,4 +76,7 @@ public static class BuiltInPresets
             },
         },
     }.AsReadOnly();
+
+    /// <summary>Preset applied automatically on startup ("Branco para cinza médio", com brilho maximo 210 e preservacao de luminosidade 70%).</summary>
+    public static RecolorPreset Default => All.Single(p => p.Name == "Branco para cinza médio");
 }
