@@ -20,8 +20,10 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
     private CancellationTokenSource? _debounceCts;
 
     public ObservableCollection<MonitorInfo> Monitors { get; } = new();
+    public IReadOnlyList<RecolorPreset> Presets { get; } = BuiltInPresets.All;
 
     [ObservableProperty] private MonitorInfo? selectedMonitor;
+    [ObservableProperty] private string? activePresetName;
     [ObservableProperty] private bool filterEnabled;
     [ObservableProperty] private string statusText = "Selecione um monitor para comecar.";
     [ObservableProperty] private bool isBusy;
