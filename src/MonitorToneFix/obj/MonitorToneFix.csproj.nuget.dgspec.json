@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "/home/eltonpaulo/Projetos/MonitorFix/tests/MonitorToneFix.Tests/MonitorToneFix.Tests.csproj": {}
+    "/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/MonitorToneFix.csproj": {}
   },
   "projects": {
     "/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix.Core/MonitorToneFix.Core.csproj": {
@@ -57,14 +57,14 @@
         }
       }
     },
-    "/home/eltonpaulo/Projetos/MonitorFix/tests/MonitorToneFix.Tests/MonitorToneFix.Tests.csproj": {
+    "/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/MonitorToneFix.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/eltonpaulo/Projetos/MonitorFix/tests/MonitorToneFix.Tests/MonitorToneFix.Tests.csproj",
-        "projectName": "MonitorToneFix.Tests",
-        "projectPath": "/home/eltonpaulo/Projetos/MonitorFix/tests/MonitorToneFix.Tests/MonitorToneFix.Tests.csproj",
+        "projectUniqueName": "/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/MonitorToneFix.csproj",
+        "projectName": "MonitorToneFix",
+        "projectPath": "/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/MonitorToneFix.csproj",
         "packagesPath": "/home/eltonpaulo/.nuget/packages/",
-        "outputPath": "/home/eltonpaulo/Projetos/MonitorFix/tests/MonitorToneFix.Tests/obj/",
+        "outputPath": "/home/eltonpaulo/Projetos/MonitorFix/src/MonitorToneFix/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/eltonpaulo/.nuget/NuGet/NuGet.Config"
@@ -95,25 +95,25 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.NET.Test.Sdk": {
+            "Avalonia": {
               "target": "Package",
-              "version": "[17.6.0, )"
+              "version": "[12.1.2, )"
             },
-            "coverlet.collector": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Avalonia.Desktop": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[12.1.2, )"
             },
-            "xunit": {
+            "Avalonia.Fonts.Inter": {
               "target": "Package",
-              "version": "[2.4.2, )"
+              "version": "[12.1.2, )"
             },
-            "xunit.runner.visualstudio": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Avalonia.Themes.Fluent": {
               "target": "Package",
-              "version": "[2.4.5, )"
+              "version": "[12.1.2, )"
+            },
+            "AvaloniaUI.DiagnosticsSupport": {
+              "target": "Package",
+              "version": "[2.2.3, )"
             }
           },
           "imports": [

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Bo7g0aVVY8KuaVGN4fq5+CbOrm2tVTWqoYVG8nFfazI+5O7WYHC8vLkZh1joYPtGYTBRpBiTIn31gErJe2W3YA==",
+  "dgSpecHash": "uRxFqwvkPOM78BUCrgunk8hMXBghvR5TPiqvedPcnDUWPAHiNaAe08V5HabsYCKT/cDcK+x+uPus7sfE6UkU+g==",
   "success": true,
   "projectFilePath": "/home/eltonpaulo/Projetos/MonitorFix/tests/MonitorToneFix.Tests/MonitorToneFix.Tests.csproj",
   "expectedPackageFiles": [
