@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MonitorToneFix.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9ff4a4208fe026fb717f63c1a8c61782bbf0032")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+677c1a05d3bf36f1823fe5fbfd8694b3f1ff10cc")]
 [assembly: System.Reflection.AssemblyProductAttribute("MonitorToneFix.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MonitorToneFix.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
