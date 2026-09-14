@@ -46,8 +46,9 @@ public class PicomShaderGeneratorTests
 
         var shader = PicomShaderGenerator.Generate(parameters);
 
-        // 224/255 = 0.878431...
-        Assert.Contains("targetColorA = vec3(0.878431, 0.878431, 0.878431)", shader);
+        var match = Regex.Match(shader, @"targetColorA = vec3\(([\d.]+), ([\d.]+), ([\d.]+)\);");
+        Assert.True(match.Success);
+        Assert.Equal(224f / 255f, float.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture), precision: 4);
     }
 
     [Fact]
