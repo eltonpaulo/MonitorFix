@@ -49,6 +49,28 @@
             </WrapPanel>
 
             <Separator />
+            <TextBlock Text="2. Predefinicoes" FontSize="16" FontWeight="Bold" />
+            <TextBlock Text="Clique para aplicar e testar ao vivo no monitor selecionado." Opacity="0.7" FontSize="12" />
+            <ItemsControl ItemsSource="{Binding Presets}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Name}"
+                                Command="{Binding $parent[ItemsControl].((vm:MainWindowViewModel)DataContext).ApplyPresetCommand}"
+                                CommandParameter="{Binding}"
+                                Margin="0,0,6,6" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Text="{Binding ActivePresetName, StringFormat='Predefinicao ativa: {0}'}"
+                       IsVisible="{Binding ActivePresetName, Converter={x:Static ObjectConverters.IsNotNull}}"
+                       FontSize="12" Opacity="0.8" />
+
+            <Separator />
             <TextBlock Text="3. Faixa A — brancos neutros" FontSize="16" FontWeight="Bold" />
             <TextBlock Text="#FFFFFF ate aproximadamente #F0F0F0." Opacity="0.7" FontSize="12" />
 
