@@ -3,6 +3,7 @@
         xmlns:vm="using:MonitorToneFix.ViewModels"
         x:Class="MonitorToneFix.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        x:Name="RootWindow"
         Title="MonitorToneFix"
         Width="620" Height="820" MinWidth="480">
 
@@ -60,7 +61,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Content="{Binding Name}"
-                                Command="{Binding $parent[ItemsControl].((vm:MainWindowViewModel)DataContext).ApplyPresetCommand}"
+                                Command="{Binding #RootWindow.((vm:MainWindowViewModel)DataContext).ApplyPresetCommand}"
                                 CommandParameter="{Binding}"
                                 Margin="0,0,6,6" />
                     </DataTemplate>
