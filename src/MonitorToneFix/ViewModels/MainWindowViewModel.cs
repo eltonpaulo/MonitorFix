@@ -8,7 +8,7 @@ using MonitorToneFix.Core.Recolor;
 
 namespace MonitorToneFix.ViewModels;
 
-public partial class MainWindowViewModel : ObservableObject, IDisposable
+public partial class MainWindowViewModel : ObservableObject
 {
     private static readonly HashSet<string> NonApplyProperties = new()
     {
@@ -170,9 +170,9 @@ public partial class MainWindowViewModel : ObservableObject, IDisposable
         },
     };
 
-    public void Dispose()
+    public async Task ShutdownAsync()
     {
         _debounceCts?.Cancel();
-        _picomController.Dispose();
+        await _picomController.ShutdownAsync();
     }
 }
