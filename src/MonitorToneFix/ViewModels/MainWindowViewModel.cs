@@ -54,6 +54,10 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel()
     {
         RefreshMonitors();
+        if (SelectedMonitor is not null)
+        {
+            ApplyPreset(BuiltInPresets.Default);
+        }
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -74,7 +78,11 @@ public partial class MainWindowViewModel : ObservableObject
         {
             Monitors.Add(m);
         }
-        SelectedMonitor = Monitors.FirstOrDefault(m => m.PersistentId == previousId) ?? Monitors.FirstOrDefault();
+        // Preferencia: o monitor ja selecionado (se ainda conectado) > "Monitor 2" (o
+        // externo, alvo padrao pedido pelo usuario) > o primeiro detectado.
+        SelectedMonitor = Monitors.FirstOrDefault(m => m.PersistentId == previousId)
+            ?? Monitors.FirstOrDefault(m => m.Index == 2)
+            ?? Monitors.FirstOrDefault();
     }
 
     [RelayCommand]
