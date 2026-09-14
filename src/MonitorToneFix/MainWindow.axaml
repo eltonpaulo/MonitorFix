@@ -61,7 +61,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Content="{Binding Name}"
-                                Command="{Binding #RootWindow.((vm:MainWindowViewModel)DataContext).ApplyPresetCommand}"
+                                Command="{Binding #RootWindow.DataContext.ApplyPresetCommand}"
                                 CommandParameter="{Binding}"
                                 Margin="0,0,6,6" />
                     </DataTemplate>
