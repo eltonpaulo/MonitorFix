@@ -43,8 +43,15 @@ public sealed class PicomController : IDisposable
 
         File.WriteAllText(_configPath, BuildConfig(active ? monitor : null));
 
+        bool wasAlreadyRunning = IsRunning;
         await EnsureStartedAsync();
-        ReloadPicom();
+        if (wasAlreadyRunning)
+        {
+            // A freshly started picom already reads this config on its own; sending
+            // SIGUSR1 right after Process.Start races its signal-handler setup and,
+            // if it loses, the default disposition for SIGUSR1 (terminate) kills it.
+            ReloadPicom();
+        }
     }
 
     public async Task ShutdownAsync()
