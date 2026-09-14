@@ -30,6 +30,16 @@ public class BuiltInPresetsTests
     }
 
     [Fact]
+    public void Default_IsGrayMedioWithUserRequestedGlobalOverrides()
+    {
+        var parameters = BuiltInPresets.Default.Build();
+
+        Assert.Equal("Branco para cinza médio", BuiltInPresets.Default.Name);
+        Assert.Equal(210, parameters.Global.MaxHighlightBrightness);
+        Assert.Equal(70, parameters.Global.LuminancePreservationPercent);
+    }
+
+    [Fact]
     public void Build_ReturnsFreshInstanceEachCall_SoMutatingOneDoesNotAffectTheNext()
     {
         var preset = BuiltInPresets.All.First();
