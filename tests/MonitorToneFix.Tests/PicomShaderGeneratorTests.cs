@@ -1,10 +1,25 @@
+using System.Globalization;
+using System.Text.RegularExpressions;
 using MonitorToneFix.Core.Recolor;
 using Xunit;
 
 namespace MonitorToneFix.Tests;
 
-public class PicomShaderGeneratorTests
+public partial class PicomShaderGeneratorTests
 {
+    private static float ExtractConst(string shader, string name)
+    {
+        var match = MyConstRegex(name).Match(shader);
+        Assert.True(match.Success, $"constante '{name}' nao encontrada no shader gerado");
+        return float.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+    }
+
+    [GeneratedRegex(@"const\s+float\s+(?:NAME)\s*=\s*([\d.]+);")]
+    private static partial Regex MyConstRegexTemplate();
+
+    private static Regex MyConstRegex(string name) =>
+        new(Regex.Escape($"const float {name} = ").Replace(@"\ ", " ") + @"([\d.]+);");
+
     [Fact]
     public void Generate_ProducesValidWindowShaderEntryPoint()
     {
