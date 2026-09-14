@@ -12,7 +12,7 @@ public partial class MainWindowViewModel : ObservableObject
 {
     private static readonly HashSet<string> NonApplyProperties = new()
     {
-        nameof(Monitors), nameof(StatusText), nameof(IsBusy),
+        nameof(Monitors), nameof(StatusText), nameof(IsBusy), nameof(ActivePresetName),
     };
 
     private readonly MonitorService _monitorService = new();
@@ -75,6 +75,35 @@ public partial class MainWindowViewModel : ObservableObject
             Monitors.Add(m);
         }
         SelectedMonitor = Monitors.FirstOrDefault(m => m.PersistentId == previousId) ?? Monitors.FirstOrDefault();
+    }
+
+    [RelayCommand]
+    private void ApplyPreset(RecolorPreset preset)
+    {
+        var p = preset.Build();
+        ActivePresetName = preset.Name;
+
+        ALowerLuminance = p.BandA.LowerLuminance;
+        ANeutralityTolerance = p.BandA.NeutralityTolerance;
+        AIntensityPercent = p.BandA.IntensityPercent;
+        AFeatherPercent = p.BandA.FeatherPercent;
+        ATargetR = p.BandA.TargetColor.R;
+        ATargetG = p.BandA.TargetColor.G;
+        ATargetB = p.BandA.TargetColor.B;
+
+        BLowerLuminance = p.BandB.LowerLuminance;
+        BRedSensitivity = p.BandB.RedSensitivity;
+        BIntensityPercent = p.BandB.IntensityPercent;
+        BFeatherPercent = p.BandB.FeatherPercent;
+        BTargetR = p.BandB.TargetColor.R;
+        BTargetG = p.BandB.TargetColor.G;
+        BTargetB = p.BandB.TargetColor.B;
+
+        MaxHighlightBrightness = p.Global.MaxHighlightBrightness;
+        LuminancePreservationPercent = p.Global.LuminancePreservationPercent;
+        PreserveHighlightDifferencesPercent = p.Global.PreserveHighlightDifferencesPercent;
+
+        FilterEnabled = true;
     }
 
     [RelayCommand]
