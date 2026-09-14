@@ -1,9 +1,147 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm="using:MonitorToneFix.ViewModels"
         x:Class="MonitorToneFix.MainWindow"
-        Title="MonitorToneFix">
-    Welcome to Avalonia!
+        x:DataType="vm:MainWindowViewModel"
+        Title="MonitorToneFix"
+        Width="620" Height="820" MinWidth="480">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer Padding="16">
+        <StackPanel Spacing="14">
+
+            <TextBlock Text="1. Monitor e seguranca" FontSize="16" FontWeight="Bold" />
+
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="Atualizar lista" Command="{Binding RefreshMonitorsCommand}" />
+                <ComboBox ItemsSource="{Binding Monitors}"
+                          SelectedItem="{Binding SelectedMonitor}"
+                          HorizontalAlignment="Stretch" Margin="0,0,8,0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayLabel}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </DockPanel>
+
+            <Border Background="#1A000000" CornerRadius="4" Padding="10" IsVisible="{Binding SelectedMonitor, Converter={x:Static ObjectConverters.IsNotNull}}">
+                <StackPanel Spacing="2" DataContext="{Binding SelectedMonitor}">
+                    <TextBlock Text="{Binding OutputName, StringFormat='Dispositivo: {0}'}" />
+                    <TextBlock Text="{Binding Manufacturer, StringFormat='Fabricante: {0}'}" />
+                    <TextBlock Text="{Binding ModelCode, StringFormat='Modelo (EDID): {0}'}" />
+                    <TextBlock>
+                        <Run Text="Resolucao: " /><Run Text="{Binding WidthPx}" /><Run Text=" x " /><Run Text="{Binding HeightPx}" />
+                        <Run Text=" — " /><Run Text="{Binding RefreshHz}" /><Run Text=" Hz" />
+                    </TextBlock>
+                    <TextBlock Text="{Binding IsPrimary, StringFormat='Monitor principal: {0}'}" />
+                    <TextBlock Text="{Binding PersistentId, StringFormat='Identificador persistente: {0}'}" TextWrapping="Wrap" FontSize="11" Opacity="0.7" />
+                </StackPanel>
+            </Border>
+
+            <WrapPanel>
+                <Button Content="Ativar filtro" Command="{Binding ActivateFilterCommand}" Margin="0,0,6,6" />
+                <Button Content="Desativar filtro" Command="{Binding DeactivateFilterCommand}" Margin="0,0,6,6" />
+                <Button Content="Restaurar imagem imediatamente" Command="{Binding RestoreImmediatelyCommand}" Margin="0,0,6,6" />
+            </WrapPanel>
+
+            <Separator />
+            <TextBlock Text="3. Faixa A — brancos neutros" FontSize="16" FontWeight="Bold" />
+            <TextBlock Text="#FFFFFF ate aproximadamente #F0F0F0." Opacity="0.7" FontSize="12" />
+
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="6">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Limite inferior da faixa A" VerticalAlignment="Center" />
+                <Slider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding ALowerLuminance}" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ALowerLuminance}" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Tolerancia de neutralidade" VerticalAlignment="Center" />
+                <Slider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding ANeutralityTolerance}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding ANeutralityTolerance}" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Intensidade A (%)" VerticalAlignment="Center" />
+                <Slider Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding AIntensityPercent}" />
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding AIntensityPercent}" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Transicao suave A (%)" VerticalAlignment="Center" />
+                <Slider Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding AFeatherPercent}" />
+                <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding AFeatherPercent}" VerticalAlignment="Center" />
+            </Grid>
+
+            <TextBlock Text="Cor alvo A" FontWeight="SemiBold" />
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto" RowSpacing="4">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Vermelho A" VerticalAlignment="Center" />
+                <Slider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding ATargetR}" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ATargetR}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Verde A" VerticalAlignment="Center" />
+                <Slider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding ATargetG}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding ATargetG}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Azul A" VerticalAlignment="Center" />
+                <Slider Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding ATargetB}" />
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding ATargetB}" VerticalAlignment="Center" />
+            </Grid>
+
+            <Separator />
+            <TextBlock Text="4. Faixa B — brancos avermelhados" FontSize="16" FontWeight="Bold" />
+            <TextBlock Text="#FFFFFF ate aproximadamente #FFE5E5." Opacity="0.7" FontSize="12" />
+
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="6">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Limite inferior da faixa B" VerticalAlignment="Center" />
+                <Slider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding BLowerLuminance}" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding BLowerLuminance}" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Sensibilidade ao vermelho" VerticalAlignment="Center" />
+                <Slider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding BRedSensitivity}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding BRedSensitivity}" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Intensidade B (%)" VerticalAlignment="Center" />
+                <Slider Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding BIntensityPercent}" />
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding BIntensityPercent}" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Transicao suave B (%)" VerticalAlignment="Center" />
+                <Slider Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding BFeatherPercent}" />
+                <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding BFeatherPercent}" VerticalAlignment="Center" />
+            </Grid>
+
+            <TextBlock Text="Cor alvo B" FontWeight="SemiBold" />
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto" RowSpacing="4">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Vermelho B" VerticalAlignment="Center" />
+                <Slider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding BTargetR}" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding BTargetR}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Verde B" VerticalAlignment="Center" />
+                <Slider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding BTargetG}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding BTargetG}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Azul B" VerticalAlignment="Center" />
+                <Slider Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding BTargetB}" />
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding BTargetB}" VerticalAlignment="Center" />
+            </Grid>
+
+            <Separator />
+            <TextBlock Text="5. Ajustes globais" FontSize="16" FontWeight="Bold" />
+
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto" RowSpacing="6">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Brilho maximo dos tons claros" VerticalAlignment="Center" />
+                <Slider Grid.Row="0" Grid.Column="1" Minimum="100" Maximum="255" Value="{Binding MaxHighlightBrightness}" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding MaxHighlightBrightness}" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Preservacao de luminosidade (%)" VerticalAlignment="Center" />
+                <Slider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding LuminancePreservationPercent}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding LuminancePreservationPercent}" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Preservar diferencas (%)" VerticalAlignment="Center" />
+                <Slider Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding PreserveHighlightDifferencesPercent}" />
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding PreserveHighlightDifferencesPercent}" VerticalAlignment="Center" />
+            </Grid>
+
+            <Separator />
+            <Border Background="#22000000" CornerRadius="4" Padding="10">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
 </Window>
