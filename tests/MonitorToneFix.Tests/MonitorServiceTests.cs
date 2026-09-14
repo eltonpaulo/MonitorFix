@@ -51,6 +51,26 @@ public class MonitorServiceTests
     }
 }
 
+/// <summary>
+/// Runs against the real X server/xrandr of the machine executing the test suite
+/// (per the original spec's "não considere concluído apenas porque compilou" rule).
+/// </summary>
+public class MonitorServiceLiveTests
+{
+    [Fact]
+    public void GetMonitors_OnThisMachine_FindsAtLeastOneConnectedDisplay()
+    {
+        var service = new MonitorService();
+        var monitors = service.GetMonitors();
+
+        Assert.NotEmpty(monitors);
+        foreach (var m in monitors)
+        {
+            Assert.True(m.WidthPx > 0 && m.HeightPx > 0, $"{m.OutputName} sem geometria valida");
+        }
+    }
+}
+
 public class EdidTests
 {
     [Fact]
