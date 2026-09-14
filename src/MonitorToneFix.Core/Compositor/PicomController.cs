@@ -87,14 +87,41 @@ public sealed class PicomController : IDisposable
 
         SetXfwm4Compositing(false);
 
-        var psi = new ProcessStartInfo("picom", $"--config \"{_configPath}\"")
+        var psi = new ProcessStartInfo("picom")
         {
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
         };
+        psi.ArgumentList.Add("--config");
+        psi.ArgumentList.Add(_configPath);
         _picomProcess = Process.Start(psi);
+
+        if (_picomProcess is not null)
+        {
+            string logPath = Path.Combine(_configDir, "picom.log");
+            _ = LogOutputAsync(_picomProcess, logPath);
+        }
+
         return Task.CompletedTask;
+    }
+
+    private static async Task LogOutputAsync(Process process, string logPath)
+    {
+        await using var log = new StreamWriter(logPath, append: false) { AutoFlush = true };
+        var stdoutTask = PumpAsync(process.StandardOutput, log);
+        var stderrTask = PumpAsync(process.StandardError, log);
+        await Task.WhenAll(stdoutTask, stderrTask);
+
+        static async Task PumpAsync(StreamReader reader, StreamWriter writer)
+        {
+            char[] buffer = new char[4096];
+            int read;
+            while ((read = await reader.ReadAsync(buffer)) > 0)
+            {
+                await writer.WriteAsync(buffer, 0, read);
+            }
+        }
     }
 
     private void ReloadPicom()
