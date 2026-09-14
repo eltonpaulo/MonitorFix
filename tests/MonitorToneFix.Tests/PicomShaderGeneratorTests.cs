@@ -5,7 +5,7 @@ using Xunit;
 
 namespace MonitorToneFix.Tests;
 
-public partial class PicomShaderGeneratorTests
+public class PicomShaderGeneratorTests
 {
     private static float ExtractConst(string shader, string name)
     {
@@ -14,11 +14,8 @@ public partial class PicomShaderGeneratorTests
         return float.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
     }
 
-    [GeneratedRegex(@"const\s+float\s+(?:NAME)\s*=\s*([\d.]+);")]
-    private static partial Regex MyConstRegexTemplate();
-
     private static Regex MyConstRegex(string name) =>
-        new(Regex.Escape($"const float {name} = ").Replace(@"\ ", " ") + @"([\d.]+);");
+        new(Regex.Escape($"const float {name} = ") + @"([\d.]+);");
 
     [Fact]
     public void Generate_ProducesValidWindowShaderEntryPoint()
@@ -38,8 +35,7 @@ public partial class PicomShaderGeneratorTests
 
         var shader = PicomShaderGenerator.Generate(parameters);
 
-        // 240/255 = 0.941176...
-        Assert.Contains("thresholdA = 0.941176", shader);
+        Assert.Equal(240f / 255f, ExtractConst(shader, "thresholdA"), precision: 4);
     }
 
     [Fact]
