@@ -52,7 +52,7 @@
             <TextBlock Text="3. Faixa A — brancos neutros" FontSize="16" FontWeight="Bold" />
             <TextBlock Text="#FFFFFF ate aproximadamente #F0F0F0." Opacity="0.7" FontSize="12" />
 
-            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="6">
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto,Auto">
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Limite inferior da faixa A" VerticalAlignment="Center" />
                 <Slider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding ALowerLuminance}" />
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ALowerLuminance}" VerticalAlignment="Center" />
@@ -71,7 +71,7 @@
             </Grid>
 
             <TextBlock Text="Cor alvo A" FontWeight="SemiBold" />
-            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto" RowSpacing="4">
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto">
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Vermelho A" VerticalAlignment="Center" />
                 <Slider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding ATargetR}" />
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ATargetR}" VerticalAlignment="Center" />
@@ -87,7 +87,7 @@
             <TextBlock Text="4. Faixa B — brancos avermelhados" FontSize="16" FontWeight="Bold" />
             <TextBlock Text="#FFFFFF ate aproximadamente #FFE5E5." Opacity="0.7" FontSize="12" />
 
-            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="6">
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto,Auto">
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Limite inferior da faixa B" VerticalAlignment="Center" />
                 <Slider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding BLowerLuminance}" />
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding BLowerLuminance}" VerticalAlignment="Center" />
@@ -106,7 +106,7 @@
             </Grid>
 
             <TextBlock Text="Cor alvo B" FontWeight="SemiBold" />
-            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto" RowSpacing="4">
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto">
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Vermelho B" VerticalAlignment="Center" />
                 <Slider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding BTargetR}" />
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding BTargetR}" VerticalAlignment="Center" />
@@ -121,7 +121,7 @@
             <Separator />
             <TextBlock Text="5. Ajustes globais" FontSize="16" FontWeight="Bold" />
 
-            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto" RowSpacing="6">
+            <Grid ColumnDefinitions="200,*,50" RowDefinitions="Auto,Auto,Auto">
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Brilho maximo dos tons claros" VerticalAlignment="Center" />
                 <Slider Grid.Row="0" Grid.Column="1" Minimum="100" Maximum="255" Value="{Binding MaxHighlightBrightness}" />
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding MaxHighlightBrightness}" VerticalAlignment="Center" />
