@@ -418,12 +418,21 @@ public sealed class PicomController : IDisposable
         }
     }
 
-    private static void StartDetached(string fileName)
+    private static void StartDetached(string command)
     {
         try
         {
-            // setsid so the restored compositor outlives this process and its group.
-            Process.Start(new ProcessStartInfo("setsid", fileName) { UseShellExecute = false });
+            // setsid so the restored compositor outlives this process and its group, and
+            // /dev/null for its three standard streams: inheriting ours would leave the
+            // compositor holding our stdout open long after we exit, which hangs anything
+            // reading the end of that pipe (the test runner, a terminal launch, a script).
+            var psi = new ProcessStartInfo("/bin/sh")
+            {
+                UseShellExecute = false,
+            };
+            psi.ArgumentList.Add("-c");
+            psi.ArgumentList.Add($"exec setsid {command} </dev/null >/dev/null 2>&1 &");
+            Process.Start(psi);
         }
         catch
         {
