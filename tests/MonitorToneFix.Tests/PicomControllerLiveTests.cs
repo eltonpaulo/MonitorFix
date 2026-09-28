@@ -10,6 +10,7 @@ namespace MonitorToneFix.Tests;
 /// running the test suite. Restores xfwm4 compositing in a finally block so a failed
 /// assertion never leaves the desktop compositor swapped.
 /// </summary>
+[Collection(CompositorCollection.Name)]
 public class PicomControllerLiveTests
 {
     [Fact]

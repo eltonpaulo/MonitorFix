@@ -13,6 +13,7 @@ namespace MonitorToneFix.Tests;
 /// or suspend cycle does to it. Both left the UI claiming the filter was active over a
 /// compositor that was not there, and reopening the app only replayed the same race.
 /// </summary>
+[Collection(CompositorCollection.Name)]
 public class PicomControllerRecoveryTests
 {
     [Fact]
