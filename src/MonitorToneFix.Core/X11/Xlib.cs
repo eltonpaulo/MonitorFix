@@ -26,6 +26,9 @@ internal static class Xlib
     public static extern nuint XInternAtom(IntPtr display, string atomName, bool onlyIfExists);
 
     [DllImport(LibX11)]
+    public static extern nuint XGetSelectionOwner(IntPtr display, nuint selection);
+
+    [DllImport(LibX11)]
     public static extern int XFree(IntPtr data);
 
     [DllImport(LibX11)]
