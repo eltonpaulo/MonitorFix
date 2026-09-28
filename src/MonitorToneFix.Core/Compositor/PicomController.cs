@@ -155,7 +155,7 @@ public sealed class PicomController : IDisposable
         }
 
         CaptureCompositorState();
-        SetXfwm4Compositing(false);
+        SetXfwm4CompositingValue(false);
         await ClearCompositorSelectionAsync().ConfigureAwait(false);
 
         var psi = new ProcessStartInfo("picom")
@@ -373,12 +373,6 @@ public sealed class PicomController : IDisposable
             // rather than leaving the desktop with no compositor at all.
             StartDetached("picom");
         }
-    }
-
-    private void SetXfwm4Compositing(bool enabled)
-    {
-        CaptureCompositorState();
-        SetXfwm4CompositingValue(enabled);
     }
 
     private static void SetXfwm4CompositingValue(bool enabled)
